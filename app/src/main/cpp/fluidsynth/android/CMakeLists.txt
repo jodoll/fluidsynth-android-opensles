@@ -1,4 +1,30 @@
 cmake_minimum_required(VERSION 3.4.1)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Werror")
+
+### INCLUDE OBOE LIBRARY ###
+
+# Set the path to the Oboe library directory (may not exist yet)
+set (OBOE_RELATIVE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../lib-oboe)
+
+# Get the absolute path to the Oboe library directory
+get_filename_component(OBOE_DIR
+                       ${OBOE_RELATIVE_PATH}
+                       ABSOLUTE)
+
+# If the Oboe library directory doesn't exist, clone it from github
+if ((NOT EXISTS ${OBOE_DIR}) OR
+    (NOT EXISTS ${OBOE_DIR}/CMakeLists.txt))
+    message(FATAL_ERROR "Couldn't find lib-oboe sources. Aborting.")
+endif()
+
+# Add the Oboe library as a subproject. Since Oboe is an out-of-tree source library we must also
+# specify a binary directory
+add_subdirectory(${OBOE_DIR} ./oboe)
+
+# Include the Oboe headers
+include_directories(${OBOE_DIR}/include)
+
+### END OBOE INCLUDE SECTION ###
 
 set(src_DIR ../src)
 
@@ -83,4 +109,4 @@ target_compile_options(fluidsynth
                             PRIVATE -Wno-unused-variable
                             PRIVATE "$<$<CONFIG:DEBUG>:-Werror>") # Only include -Werror when building debug config
 
-target_link_libraries (fluidsynth OpenSLES log)
+target_link_libraries (fluidsynth OpenSLES log oboe)
