@@ -8,6 +8,15 @@
 #define FLUIDSYNTH_ANDROID_OPENSLES_FLUID_OBOE_WRAPPER_H
 
 #include <fluidsynth.h>
+#include "fluid_oboe_driver.h"
+
+#ifdef __cplusplus
+struct OboeDriverWrapper {
+    char *name;
+    OboeDriver *driver;
+    OboeSynthesizer *synthesizer;
+};
+#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -20,6 +29,6 @@ void delete_fluid_oboe_audio_driver(fluid_audio_driver_t *self);
 void fluid_oboe_audio_driver_settings(fluid_settings_t *settings);
 
 #ifdef __cplusplus
-};
+}
 #endif
 #endif //FLUIDSYNTH_ANDROID_OPENSLES_FLUID_OBOE_WRAPPER_H
