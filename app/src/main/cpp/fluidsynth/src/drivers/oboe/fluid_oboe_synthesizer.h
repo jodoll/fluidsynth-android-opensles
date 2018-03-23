@@ -8,10 +8,12 @@ class OboeSynthesizer {
 public:
     OboeSynthesizer(struct _fluid_synth_t *synth);
 
+    void fillBuffer(int16_t *buffer, int len);
     ~OboeSynthesizer();
 
 private:
     struct _fluid_synth_t *fluidSynth;
+
 };
 
 #endif

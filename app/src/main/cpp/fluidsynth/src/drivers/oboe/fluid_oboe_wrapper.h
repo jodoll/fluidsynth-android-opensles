@@ -15,6 +15,13 @@ struct OboeDriverWrapper {
     char *name;
     OboeDriver *driver;
     OboeSynthesizer *synthesizer;
+
+    ~OboeDriverWrapper() {
+        delete driver;
+        driver = NULL;
+        delete synthesizer;
+        synthesizer = NULL;
+    }
 };
 #endif
 

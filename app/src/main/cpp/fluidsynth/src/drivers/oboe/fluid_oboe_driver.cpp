@@ -31,6 +31,7 @@ void OboeDriver::openStream() {
 }
 
 oboe::DataCallbackResult OboeDriver::onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) {
+    synthesizer->fillBuffer(static_cast<int16_t *>(audioData), numFrames);
     return oboe::DataCallbackResult::Continue;
 }
 

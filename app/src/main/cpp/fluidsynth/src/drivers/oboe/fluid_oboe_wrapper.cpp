@@ -36,11 +36,6 @@ fluid_audio_driver_t *new_fluid_oboe_audio_driver2(fluid_settings_t *settings, f
 
 void delete_fluid_oboe_audio_driver(fluid_audio_driver_t *self) {
     OboeDriverWrapper *wrapper = AS_OBOE_WRAPPER(self);
-
-    delete wrapper->driver;
-    wrapper->driver = NULL;
-    delete wrapper->synthesizer;
-    wrapper->synthesizer = NULL;
     delete wrapper;
 }
 
