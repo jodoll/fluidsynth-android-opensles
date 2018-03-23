@@ -28,8 +28,6 @@
 #include "fluid_adriver.h"
 #include "fluid_settings.h"
 
-#include "config.h"
-
 #include <sys/time.h>
 #include <SLES/OpenSLES.h>
 #include <SLES/OpenSLES_Android.h>

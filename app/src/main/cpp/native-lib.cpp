@@ -12,7 +12,7 @@ JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1ope
         jstring sf2path) {
     // Init settings
     settings = new_fluid_settings();
-    fluid_settings_setstr(settings, "audio.driver", "opensles");
+    fluid_settings_setstr(settings, "audio.driver", "oboe");
     fluid_settings_setint(settings, "audio.opensles.use-callback-mode", 1);
     fluid_settings_setint(settings, "audio.period-size", 64);
 

@@ -44,6 +44,15 @@ void delete_fluid_opensles_audio_driver(fluid_audio_driver_t* p);
 void fluid_opensles_audio_driver_settings(fluid_settings_t* settings);
 //#endif
 
+//#if OBOE_SUPPORT
+fluid_audio_driver_t *new_fluid_oboe_audio_driver(fluid_settings_t *settings,
+                                                  fluid_synth_t *synth);
+fluid_audio_driver_t *new_fluid_oboe_audio_driver2(fluid_settings_t *settings,
+                                                   fluid_audio_func_t func, void *data);
+void delete_fluid_oboe_audio_driver(fluid_audio_driver_t *self);
+void fluid_oboe_audio_driver_settings(fluid_settings_t *settings);
+//#endif OBOE_SUPPORT
+
 //#if PULSE_SUPPORT
 //fluid_audio_driver_t* new_fluid_pulse_audio_driver(fluid_settings_t* settings,
 //						   fluid_synth_t* synth);
@@ -161,6 +170,13 @@ static const fluid_audriver_definition_t fluid_audio_drivers[] =
         fluid_opensles_audio_driver_settings },
 //#endif
 
+    {"oboe",
+            new_fluid_oboe_audio_driver,
+            new_fluid_oboe_audio_driver2,
+            delete_fluid_oboe_audio_driver,
+            fluid_oboe_audio_driver_settings
+    },
+
 //#if PULSE_SUPPORT
 //    { "pulseaudio",
 //        new_fluid_pulse_audio_driver,
@@ -255,6 +271,8 @@ void fluid_audio_driver_settings(fluid_settings_t* settings)
 //  fluid_settings_register_str(settings, "audio.driver", "alsa", 0);
 //#elif OPENSLES_SUPPORT
   fluid_settings_register_str(settings, "audio.driver", "opensles", 0);
+//#elif OBOE_SUPPORT
+  fluid_settings_register_str(settings, "audio.driver", "oboe", 0);
 //#elif PULSE_SUPPORT
 //  fluid_settings_register_str(settings, "audio.driver", "pulseaudio", 0);
 //#elif OSS_SUPPORT
@@ -278,6 +296,9 @@ void fluid_audio_driver_settings(fluid_settings_t* settings)
   /* Add all drivers to the list of options */
 //#if OPENSLES_SUPPORT
   fluid_settings_add_option(settings, "audio.driver", "opensles");
+//#endif
+//#if OBOE_SUPPORT
+  fluid_settings_add_option(settings, "audio.driver", "oboe");
 //#endif
 //#if PULSE_SUPPORT
 //  fluid_settings_add_option(settings, "audio.driver", "pulseaudio");
@@ -459,7 +480,7 @@ int fluid_audio_driver_register(const char** adrivers)
 {
     unsigned int i;
     uint8_t      disable_mask[FLUID_N_ELEMENTS(fluid_adriver_disable_mask)];
-    
+
     if (adrivers == NULL) {
       /* Pass NULL to register all available drivers. */
       FLUID_MEMSET(fluid_adriver_disable_mask, 0, sizeof(fluid_adriver_disable_mask));
