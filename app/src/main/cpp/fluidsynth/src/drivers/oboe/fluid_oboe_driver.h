@@ -11,7 +11,7 @@ class OboeDriver : oboe::AudioStreamCallback {
 public:
     OboeDriver(OboeSynthesizer *synthesizer);
 
-    void start();
+    void open();
 
     ~OboeDriver();
 

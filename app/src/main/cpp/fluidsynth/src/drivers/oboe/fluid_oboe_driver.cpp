@@ -7,7 +7,7 @@ OboeDriver::OboeDriver(OboeSynthesizer *synth) {
     this->synthesizer = synth;
 }
 
-void OboeDriver::start() {
+void OboeDriver::open() {
     this->openStream();
     this->audioStream->requestStart();
 }

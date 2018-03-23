@@ -24,7 +24,7 @@ fluid_audio_driver_t *new_fluid_oboe_audio_driver(fluid_settings_t *settings, fl
     wrapper->driver = driver;
     wrapper->synthesizer = synthesizer;
 
-    driver->start();
+    driver->open();
 
     return AS_FLUID_AUDIO_DRIVER(wrapper);
 }
