@@ -20,15 +20,25 @@ void OboeDriver::openStream() {
     builder.setDirection(oboe::Direction::Output);
     builder.setPerformanceMode(oboe::PerformanceMode::LowLatency);
 
-    builder.setFormat(this->audioSettings->audioFormat);
-    builder.setSampleRate(this->audioSettings->sampleRateHz);
-    builder.setChannelCount(this->audioSettings->channelCount);
-    builder.setBufferCapacityInFrames(this->audioSettings->bufferSizeFrames);
+    builder.setFormat(audioSettings->audioFormat);
+    builder.setSampleRate(audioSettings->sampleRateHz);
+    builder.setChannelCount(audioSettings->channelCount);
+    builder.setBufferCapacityInFrames(audioSettings->bufferSizeFrames);
 
     builder.setCallback(this);
 
-    if (oboe::Result::OK != builder.openStream(&this->audioStream)) {
+    if (oboe::Result::OK != builder.openStream(&audioStream)) {
         fluid_log(FLUID_ERR, "OboeError: Couldn't open AudioStream");
+    }
+}
+
+
+void OboeDriver::adjustSynthesizerSampleRate() {
+    int32_t actualSampleRateHz = audioStream->getSampleRate();
+    if (audioSettings->sampleRateHz != actualSampleRateHz) {
+        fluid_log(FLUID_WARN, "Actual sample rate differs from requested rate, trying to adjust synthesizers rate from %d to %d", audioSettings->sampleRateHz, actualSampleRateHz);
+        audioSettings->sampleRateHz = actualSampleRateHz;
+        synthesizer->setSampleRate(actualSampleRateHz);
     }
 }
 

@@ -19,20 +19,23 @@ public:
     ~OboeDriver();
 
 private:
-    oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) override;
-
-private:
     OboeAudioSettings *audioSettings = nullptr;
     OboeSynthesizer *synthesizer = nullptr;
     oboe::AudioStream *audioStream = nullptr;
 
     void openStream();
 
-    void closeStream();
+    void adjustSynthesizerSampleRate();
+
+    oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) override;
 
     void onErrorBeforeClose(oboe::AudioStream *oboeStream, oboe::Result error) override;
 
     void onErrorAfterClose(oboe::AudioStream *oboeStream, oboe::Result error) override;
+
+    void closeStream();
+
+
 };
 
 #endif //__cplusplus
