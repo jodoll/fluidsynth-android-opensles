@@ -52,7 +52,28 @@ void OboeDriver::onErrorBeforeClose(oboe::AudioStream *oboeStream, oboe::Result 
 }
 
 void OboeDriver::onErrorAfterClose(oboe::AudioStream *oboeStream, oboe::Result error) {
-    fluid_log(FLUID_ERR, "OboeError after closing AudioStream: %d", error);
+    switch (error) {
+        case oboe::Result::ErrorDisconnected:
+            fluid_log(FLUID_DBG, "Output disconnected, restarting Stream");
+            restartStream();
+            break;
+        default:
+            fluid_log(FLUID_ERR, "OboeError after closing AudioStream: %d", error);
+
+    }
+}
+
+void OboeDriver::restartStream() {
+    if (restartLock.try_lock()) {
+        closeStream();
+        open();
+        restartLock.unlock();
+    } else {
+        fluid_log(FLUID_DBG, "Restart stream operation already in progress - ignoring this request");
+        // We were unable to obtain the restarting lock which means the restart operation is currently
+        // active. This is probably because we received successive "stream disconnected" events.
+        // Internal issue b/63087953
+    }
 }
 
 void OboeDriver::closeStream() {

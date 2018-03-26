@@ -3,6 +3,7 @@
 
 #include <oboe/AudioStreamCallback.h>
 #include <oboe/AudioStream.h>
+#include <mutex>
 #include "OboeSynthesizer.h"
 #include "OboeAudioSettings.h"
 
@@ -23,6 +24,8 @@ private:
     OboeSynthesizer *synthesizer = nullptr;
     oboe::AudioStream *audioStream = nullptr;
 
+    std::mutex restartLock;
+
     void openStream();
 
     void adjustSynthesizerSampleRate();
@@ -33,9 +36,9 @@ private:
 
     void onErrorAfterClose(oboe::AudioStream *oboeStream, oboe::Result error) override;
 
+    void restartStream();
+
     void closeStream();
-
-
 };
 
 #endif //__cplusplus
