@@ -59,6 +59,9 @@ JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1ope
         JNIEnv *env,
         jobject /* this */) {
     delete_fluid_audio_driver(audioDriver);
+    audioDriver = NULL;
     delete_fluid_synth(synth);
+    synth = NULL;
     delete_fluid_settings(settings);
+    settings = NULL;
 }
