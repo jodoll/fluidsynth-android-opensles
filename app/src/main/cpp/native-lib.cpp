@@ -11,12 +11,14 @@ extern "C"
 JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1opensles_NativeLibJNI_init(
         JNIEnv *env,
         jobject /* this */,
-        jstring sf2path) {
+        jstring sf2path,
+        jint openGLDefaultBurstSize) {
     // Init settings
     settings = new_fluid_settings();
     fluid_settings_setstr(settings, KEY_DRIVER, DRIVER_NAME_OBOE);
     fluid_settings_setint(settings, KEY_BUFFER_SIZE, 256);
     fluid_settings_setnum(settings, KEY_SAMPLE_RATE, 48000);
+    fluid_settings_setint(settings, KEY_BURST_SIZE, (int) openGLDefaultBurstSize);
 
     synth = new_fluid_synth(settings);
 

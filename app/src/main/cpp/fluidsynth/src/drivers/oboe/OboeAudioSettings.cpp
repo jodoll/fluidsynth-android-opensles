@@ -13,13 +13,16 @@ extern "C" {
 
 #include "OboeAudioSettings.h"
 
-void OboeAudioSettings::addCustomAttributes(fluid_settings_t *settings) {
+void OboeAudioSettings::registerCustomSettingsAttributes(fluid_settings_t *settings) {
     fluid_settings_register_int(settings, KEY_BUFFER_SIZE, OBOE_DEFAULT_BUFFER_SIZE, OBOE_MIN_BUFFER_SIZE, OBOE_MAX_BUFFER_SIZE,
+                                FLUID_HINT_BOUNDED_BELOW);
+    fluid_settings_register_int(settings, KEY_BURST_SIZE, OBOE_DEFAULT_BURST_SIZE, OBOE_MIN_BURST_SIZE, OBOE_MAX_BURST_SIZE,
                                 FLUID_HINT_BOUNDED_BELOW);
 }
 
 OboeAudioSettings::OboeAudioSettings(fluid_settings_t *settings) {
     fluid_settings_getint(settings, KEY_BUFFER_SIZE, &bufferSizeFrames);
+    fluid_settings_getint(settings, KEY_BURST_SIZE, &burstSizeFrames);
 
     double sampleRate;
     fluid_settings_getnum(settings, KEY_SAMPLE_RATE, &sampleRate);

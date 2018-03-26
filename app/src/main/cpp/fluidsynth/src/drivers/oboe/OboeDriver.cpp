@@ -24,6 +24,7 @@ void OboeDriver::openStream() {
     builder.setSampleRate(audioSettings->sampleRateHz);
     builder.setChannelCount(audioSettings->channelCount);
     builder.setBufferCapacityInFrames(audioSettings->bufferSizeFrames);
+    builder.setDefaultFramesPerBurst(audioSettings->burstSizeFrames);
 
     builder.setCallback(this);
 
