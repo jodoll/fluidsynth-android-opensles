@@ -14,6 +14,7 @@ extern "C" {
 constexpr const char *KEY_SAMPLE_RATE = "synth.sample-rate";
 constexpr const char *KEY_SAMPLE_FORMAT = "audio.sample-format";
 constexpr const char *KEY_PERIOD_SIZE = "audio.period-size";
+constexpr const char *KEY_BUFFER_SIZE = "audio.oboe.buffer-size";
 constexpr const char *KEY_DRIVER = "audio.driver";
 
 constexpr const char *SAMPLE_FORMAT_FLOAT = "float";

@@ -15,6 +15,10 @@ extern "C" {
 
 #include <fluidsynth.h>
 
+constexpr int OBOE_DEFAULT_BUFFER_SIZE = 512;
+constexpr int OBOE_MIN_BUFFER_SIZE = 16; //Chosen by guess
+constexpr int OBOE_MAX_BUFFER_SIZE = 1024000; //Chosen by guess
+
 #ifdef __cplusplus
 };
 #endif
@@ -22,8 +26,9 @@ extern "C" {
 #ifdef __cplusplus
 
 class OboeAudioSettings {
-
 public:
+    static void addCustomAttributes(fluid_settings_t *settings);
+
     OboeAudioSettings(fluid_settings_t *settings);
 
     OboeAudioSettings(int channelCount, int32_t bufferSizeFrames, int32_t sampleRateHz, oboe::AudioFormat audioFormat);

@@ -42,5 +42,5 @@ void delete_fluid_oboe_audio_driver(fluid_audio_driver_t *self) {
 }
 
 void fluid_oboe_audio_driver_settings(fluid_settings_t *settings) {
-    //Nothing for now
+    OboeAudioSettings::addCustomAttributes(settings);
 }
