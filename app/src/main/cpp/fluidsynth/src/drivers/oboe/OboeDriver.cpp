@@ -9,8 +9,9 @@ OboeDriver::OboeDriver(OboeSynthesizer *synth, OboeAudioSettings *audioSettings)
 }
 
 void OboeDriver::open() {
-    this->openStream();
-    this->audioStream->requestStart();
+    openStream();
+    adjustSynthesizerSampleRate();
+    audioStream->requestStart();
 }
 
 void OboeDriver::openStream() {
@@ -47,14 +48,14 @@ void OboeDriver::onErrorAfterClose(oboe::AudioStream *oboeStream, oboe::Result e
 void OboeDriver::closeStream() {
     if (audioStream == nullptr) return;
 
-    this->audioStream->stop();
-    this->audioStream->close();
-    delete this->audioStream;
-    this->audioStream = nullptr;
+    audioStream->stop();
+    audioStream->close();
+    delete audioStream;
+    audioStream = nullptr;
 }
 
 OboeDriver::~OboeDriver() {
     closeStream();
-    this->synthesizer = nullptr;
-    this->audioSettings = nullptr;
+    synthesizer = nullptr;
+    audioSettings = nullptr;
 }
