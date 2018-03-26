@@ -54,6 +54,18 @@ JNIEXPORT jboolean JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_
     return (jboolean) (FLUID_OK == fluid_synth_program_change(synth, (int) channel, (int) programNumber));
 }
 
+/**
+ * Set synth output gain value.
+ * @param gain Gain value (function clamps value to the range 0.0 to 10.0)
+ */
+extern "C"
+JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1opensles_NativeLibJNI_setGain(
+        JNIEnv *env,
+        jobject /* this */,
+        jfloat gain) {
+    fluid_synth_set_gain(synth, (float) gain);
+}
+
 extern "C"
 JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1opensles_NativeLibJNI_destroy(
         JNIEnv *env,
