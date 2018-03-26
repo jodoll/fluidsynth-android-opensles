@@ -1,7 +1,6 @@
-#include <fluidsynth.h>
 #include "OboeSynthesizer.h"
 
-OboeSynthesizer::OboeSynthesizer(_fluid_synth_t *synth) {
+OboeSynthesizer::OboeSynthesizer(fluid_synth_t *synth) {
     this->fluidSynth = synth;
 }
 
