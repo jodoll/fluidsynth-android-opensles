@@ -8,7 +8,7 @@
 #define FLUIDSYNTH_ANDROID_OPENSLES_FLUID_OBOE_WRAPPER_H
 
 #include <fluidsynth.h>
-#include "fluid_oboe_driver.h"
+#include "OboeDriver.h"
 
 #ifdef __cplusplus
 struct OboeDriverWrapper {

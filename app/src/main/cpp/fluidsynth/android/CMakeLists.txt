@@ -61,9 +61,9 @@ set(fluidsynth_sources
         ${src_DIR}/bindings/fluid_filerenderer.c
         ${src_DIR}/drivers/fluid_adriver.c
         ${src_DIR}/drivers/fluid_opensles.c
-        ${src_DIR}/drivers/oboe/fluid_oboe_driver.cpp
-        ${src_DIR}/drivers/oboe/fluid_oboe_wrapper.cpp
-        ${src_DIR}/drivers/oboe/fluid_oboe_synthesizer.cpp
+        ${src_DIR}/drivers/oboe/OboeDriver.cpp
+        ${src_DIR}/drivers/oboe/OboeDriverWrapper.cpp
+        ${src_DIR}/drivers/oboe/OboeSynthesizer.cpp
         ${src_DIR}/utils/fluid_sys.c
         src/bindings/fluid_cmd.c
         src/drivers/fluid_mdriver.c

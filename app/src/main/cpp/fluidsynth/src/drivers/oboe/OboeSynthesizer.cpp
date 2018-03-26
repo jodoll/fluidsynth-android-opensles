@@ -1,5 +1,5 @@
 #include <fluidsynth.h>
-#include "fluid_oboe_synthesizer.h"
+#include "OboeSynthesizer.h"
 
 OboeSynthesizer::OboeSynthesizer(_fluid_synth_t *synth) {
     this->fluidSynth = synth;

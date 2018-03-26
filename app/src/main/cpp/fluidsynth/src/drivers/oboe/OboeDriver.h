@@ -3,7 +3,7 @@
 
 #include <oboe/AudioStreamCallback.h>
 #include <oboe/AudioStream.h>
-#include "fluid_oboe_synthesizer.h"
+#include "OboeSynthesizer.h"
 
 #ifdef __cplusplus
 

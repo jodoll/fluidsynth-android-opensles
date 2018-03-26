@@ -1,7 +1,7 @@
 #include <fluidsynth.h>
 #include <stdexcept>
 #include <oboe/AudioStreamBuilder.h>
-#include "fluid_oboe_driver.h"
+#include "OboeDriver.h"
 
 OboeDriver::OboeDriver(OboeSynthesizer *synth) {
     this->synthesizer = synth;

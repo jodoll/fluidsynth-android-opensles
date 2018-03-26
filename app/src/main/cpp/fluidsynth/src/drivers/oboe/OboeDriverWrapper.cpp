@@ -1,7 +1,7 @@
 #include <fluidsynth.h>
 #include <stdexcept>
-#include "fluid_oboe_wrapper.h"
-#include "fluid_oboe_driver.h"
+#include "OboeDriverWrapper.h"
+#include "OboeDriver.h"
 
 #define AS_OBOE_WRAPPER(a) (reinterpret_cast<OboeDriverWrapper*>(a))
 #define AS_FLUID_AUDIO_DRIVER(a)   (reinterpret_cast<fluid_audio_driver_t*>(a))
