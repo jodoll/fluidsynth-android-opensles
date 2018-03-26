@@ -5,7 +5,7 @@
 
 fluid_settings_t *settings;
 fluid_synth_t *synth;
-fluid_audio_driver_t *adriver;
+fluid_audio_driver_t *audioDriver;
 
 extern "C"
 JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1opensles_NativeLibJNI_init(
@@ -25,7 +25,7 @@ JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1ope
     fluid_synth_sfload(synth, nativeSf2Path, true);
     env->ReleaseStringUTFChars(sf2path, nativeSf2Path);
 
-    adriver = new_fluid_audio_driver(settings, synth);
+    audioDriver = new_fluid_audio_driver(settings, synth);
 }
 
 extern "C"
@@ -58,7 +58,7 @@ extern "C"
 JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1opensles_NativeLibJNI_destroy(
         JNIEnv *env,
         jobject /* this */) {
-    delete_fluid_audio_driver(adriver);
+    delete_fluid_audio_driver(audioDriver);
     delete_fluid_synth(synth);
     delete_fluid_settings(settings);
 }
