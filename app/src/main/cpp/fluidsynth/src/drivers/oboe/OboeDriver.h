@@ -4,12 +4,15 @@
 #include <oboe/AudioStreamCallback.h>
 #include <oboe/AudioStream.h>
 #include "OboeSynthesizer.h"
+#include "OboeAudioSettings.h"
+
+constexpr const char *DRIVER_NAME_OBOE = "oboe";
 
 #ifdef __cplusplus
 
 class OboeDriver : oboe::AudioStreamCallback {
 public:
-    OboeDriver(OboeSynthesizer *synthesizer);
+    OboeDriver(OboeSynthesizer *synthesizer, OboeAudioSettings *audioSettings);
 
     void open();
 
@@ -19,11 +22,7 @@ private:
     oboe::DataCallbackResult onAudioReady(oboe::AudioStream *oboeStream, void *audioData, int32_t numFrames) override;
 
 private:
-    int channelCount = 2;
-    int32_t bufferSizeFrames = 64;
-    int32_t sampleRateHz = 44100;
-    oboe::AudioFormat audioFormat = oboe::AudioFormat::I16;
-
+    OboeAudioSettings *audioSettings = nullptr;
     OboeSynthesizer *synthesizer = nullptr;
     oboe::AudioStream *audioStream = nullptr;
 

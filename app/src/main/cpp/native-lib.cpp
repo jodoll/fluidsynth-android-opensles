@@ -1,5 +1,7 @@
 #include <jni.h>
 #include <fluidsynth.h>
+#include <fluid_settings_constants.h>
+#include <oboe/OboeDriver.h>
 
 fluid_settings_t *settings;
 fluid_synth_t *synth;
@@ -12,9 +14,9 @@ JNIEXPORT void JNICALL Java_opensles_android_fluidsynth_fluidsynth_1android_1ope
         jstring sf2path) {
     // Init settings
     settings = new_fluid_settings();
-    fluid_settings_setstr(settings, "audio.driver", "oboe");
-    fluid_settings_setint(settings, "audio.opensles.use-callback-mode", 1);
-    fluid_settings_setint(settings, "audio.period-size", 64);
+    fluid_settings_setstr(settings, KEY_DRIVER, DRIVER_NAME_OBOE);
+    fluid_settings_setint(settings, KEY_PERIOD_SIZE, 64);
+    fluid_settings_setint(settings, KEY_SAMPLE_RATE, 48000);
 
     synth = new_fluid_synth(settings);
 

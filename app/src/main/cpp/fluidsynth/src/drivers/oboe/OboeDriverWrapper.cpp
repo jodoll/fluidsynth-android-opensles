@@ -17,12 +17,14 @@ void fluid_oboe_audio_driver_settings(fluid_settings_t *settings);
 fluid_audio_driver_t *new_fluid_oboe_audio_driver(fluid_settings_t *settings, fluid_synth_t *fluidSynth) {
     char *name = (char *) "oboe";
     OboeSynthesizer *synthesizer = new OboeSynthesizer(fluidSynth);
-    OboeDriver *driver = new OboeDriver(synthesizer);
+    OboeAudioSettings *audioSettings = new OboeAudioSettings(settings);
+    OboeDriver *driver = new OboeDriver(synthesizer, audioSettings);
 
     OboeDriverWrapper *wrapper = new OboeDriverWrapper();
     wrapper->name = name;
     wrapper->driver = driver;
     wrapper->synthesizer = synthesizer;
+    wrapper->audioSettings = audioSettings;
 
     driver->open();
 

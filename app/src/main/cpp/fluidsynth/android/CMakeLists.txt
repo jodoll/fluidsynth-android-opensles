@@ -64,6 +64,7 @@ set(fluidsynth_sources
         ${src_DIR}/drivers/oboe/OboeDriver.cpp
         ${src_DIR}/drivers/oboe/OboeDriverWrapper.cpp
         ${src_DIR}/drivers/oboe/OboeSynthesizer.cpp
+        ${src_DIR}/drivers/oboe/OboeAudioSettings.cpp
         ${src_DIR}/utils/fluid_sys.c
         src/bindings/fluid_cmd.c
         src/drivers/fluid_mdriver.c

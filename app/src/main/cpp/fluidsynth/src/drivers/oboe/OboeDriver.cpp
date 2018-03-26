@@ -3,8 +3,9 @@
 #include <oboe/AudioStreamBuilder.h>
 #include "OboeDriver.h"
 
-OboeDriver::OboeDriver(OboeSynthesizer *synth) {
+OboeDriver::OboeDriver(OboeSynthesizer *synth, OboeAudioSettings *audioSettings) {
     this->synthesizer = synth;
+    this->audioSettings = audioSettings;
 }
 
 void OboeDriver::open() {
@@ -18,10 +19,10 @@ void OboeDriver::openStream() {
     builder.setDirection(oboe::Direction::Output);
     builder.setPerformanceMode(oboe::PerformanceMode::LowLatency);
 
-    builder.setFormat(audioFormat);
-    builder.setSampleRate(sampleRateHz);
-    builder.setChannelCount(channelCount);
-    builder.setBufferCapacityInFrames(bufferSizeFrames);
+    builder.setFormat(this->audioSettings->audioFormat);
+    builder.setSampleRate(this->audioSettings->sampleRateHz);
+    builder.setChannelCount(this->audioSettings->channelCount);
+    builder.setBufferCapacityInFrames(this->audioSettings->bufferSizeFrames);
 
     builder.setCallback(this);
 
@@ -55,4 +56,5 @@ void OboeDriver::closeStream() {
 OboeDriver::~OboeDriver() {
     closeStream();
     this->synthesizer = nullptr;
+    this->audioSettings = nullptr;
 }
